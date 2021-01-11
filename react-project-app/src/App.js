@@ -59,19 +59,11 @@ const App = props => {
   if(togglePersons) {
     persons = (
       <div>
-        <Person
-          name={personsState.persons[0].name}
-          age={personsState.persons[0].age} />
-        <Person
-          name={personsState.persons[1].name}
-          age={personsState.persons[1].age}
-          click={() => switchNameHandler("Max!!")}
-          changed={nameChangeHandler}>
-              My hobbies: sport
-        </Person>
-        <Person
-          name={personsState.persons[2].name}
-          age={personsState.persons[2].age} />
+        {personsState.persons.map(person => {
+          return <Person 
+            name={person.name} 
+            age={person.age} />
+        })} 
       </div>
 
     );
