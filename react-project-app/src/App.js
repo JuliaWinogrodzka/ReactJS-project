@@ -6,9 +6,9 @@ const App = props => {
 
   const [ personsState, setPersonsState ] = useState({
     persons: [
-      { name: "Max", age: 28 },
-      { name: "Manu", age: 29 },
-      { name: "Julia", age: 23 }
+      { id:'asfa1', name: "Max", age: 28 },
+      { id:'vas23da', name: "Manu", age: 29 },
+      { id:'xfsd3', name: "Julia", age: 23 }
     ],
     otherState: "some other value",
   });
@@ -26,14 +26,23 @@ const App = props => {
     setPersonsState({persons: persons});
   };
   
-  const nameChangeHandler = (Event) => {
-    setPersonsState( {
-      persons: [
-        { name: "Max", age: 28 },
-        { name: Event.target.value, age: 29 },
-        { name: "Julia", age: 23 }
-      ],
+  const nameChangeHandler = (Event, id) => {
+    const personIndex = personsState.persons.findIndex(p => {
+      return p.id === id;
     });
+
+    const person = {
+      ...personsState.persons[personIndex]
+    }; 
+
+    // const person = Object.assign({}, personsState.persons[personIndex]);
+
+    person.name = Event.target.value;
+
+    const persons = [...personsState.persons];
+    persons[personIndex] = person;
+    
+    setPersonsState( {persons: persons});
   };
 
   const style = {
@@ -57,7 +66,9 @@ const App = props => {
           return <Person
             click={() => deletePersonHandler(index)}
             name={person.name} 
-            age={person.age} />
+            age={person.age}
+            key={person.id}
+            changed={(Event) => nameChangeHandler(Event, person.id)} />
         })} 
       </div>
 
