@@ -1,6 +1,23 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+
 import './App.css';
 import Person from './Person/Person';
+
+const StyledButton = styled.button`
+  background-color: ${props => props.alt ? 'red' : 'green'};
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
+    color: black;
+  }
+  };
+`;
 
 const App = props => {
 
@@ -45,13 +62,18 @@ const App = props => {
     setPersonsState( {persons: persons});
   };
 
-  const style = {
-    backgroundColor: 'white',
-    font: 'inherit',
-    border: '1px solid blue',
-    padding: '8px',
-    cursor: 'pointer',
-  };
+  // const style = {
+  //   backgroundColor: 'green',
+  //   color: 'white',
+  //   font: 'inherit',
+  //   border: '1px solid blue',
+  //   padding: '8px',
+  //   cursor: 'pointer',
+  //   ':hover': {
+  //     backgroundColor: 'lightgreen',
+  //     color: 'black'
+  //   }
+  // };
 
   const togglePersonsHandler = () => {
     setTogglePersons(prevToggle => !prevToggle);
@@ -71,18 +93,33 @@ const App = props => {
             changed={(Event) => nameChangeHandler(Event, person.id)} />
         })} 
       </div>
-
     );
+
+
+    // style.backgroundColor = 'red';
+    // style[':hover']={
+    //   backgroundColor: 'salmon',
+    //   color: 'black'
+    // }
   };
+
+  const classes = [];
+  
+  if(personsState.persons.length <= 2) {
+    classes.push('red'); //classes = ['red']
+  }
+  if(personsState.persons.length <= 1) {
+    classes.push('bold'); //classes = ['red', 'bold']
+  }
+
 
   return(
     <div className="App"> 
       <h1>Hi I am React App</h1>
-      <p>This is really working</p>
-      <button 
-        style={style}
-        onClick={togglePersonsHandler}>Toggle Persons
-      </button> 
+      <p className={classes.join(' ')}>This is really working</p>
+      <StyledButton alt={togglePersons} onClick={togglePersonsHandler}>
+        Toggle Persons
+      </StyledButton> 
       {/* in class Component: onClick={this.switchNameHandler.bind(this, "Maxymillian!!")} */}
       {persons}
     </div>
