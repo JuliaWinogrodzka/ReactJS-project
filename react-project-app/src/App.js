@@ -1,23 +1,8 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 
 import './App.css';
 import Person from './Person/Person';
 
-const StyledButton = styled.button`
-  background-color: ${props => props.alt ? 'red' : 'green'};
-  color: white;
-  font: inherit;
-  border: 1px solid blue;
-  padding: 8px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
-    color: black;
-  }
-  };
-`;
 
 const App = props => {
 
@@ -62,19 +47,6 @@ const App = props => {
     setPersonsState( {persons: persons});
   };
 
-  // const style = {
-  //   backgroundColor: 'green',
-  //   color: 'white',
-  //   font: 'inherit',
-  //   border: '1px solid blue',
-  //   padding: '8px',
-  //   cursor: 'pointer',
-  //   ':hover': {
-  //     backgroundColor: 'lightgreen',
-  //     color: 'black'
-  //   }
-  // };
-
   const togglePersonsHandler = () => {
     setTogglePersons(prevToggle => !prevToggle);
   };
@@ -117,9 +89,9 @@ const App = props => {
     <div className="App"> 
       <h1>Hi I am React App</h1>
       <p className={classes.join(' ')}>This is really working</p>
-      <StyledButton alt={togglePersons} onClick={togglePersonsHandler}>
+      <button className={"button"} onClick={togglePersonsHandler}>
         Toggle Persons
-      </StyledButton> 
+      </button> 
       {/* in class Component: onClick={this.switchNameHandler.bind(this, "Maxymillian!!")} */}
       {persons}
     </div>
