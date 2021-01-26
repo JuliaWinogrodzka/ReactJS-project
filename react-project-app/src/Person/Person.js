@@ -1,8 +1,11 @@
 import React from 'react';
 
 import classes from './Person.module.css';
+const rnd = Math.random();
 
-
+if (rnd > 0.8){
+  throw new Error("Something went wrong");
+}
 const person = (props) => {
   return (
     <div className={classes.Person}>
